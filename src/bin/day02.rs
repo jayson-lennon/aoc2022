@@ -47,11 +47,10 @@ impl Choice {
 impl FromStr for Choice {
     type Err = ();
 
-    // part 1 conversion
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         // rock.paper.scissors
         //  A    B     C
-        //  X    Y     Z
+        //  X    Y     Z (only applies to part 1)
         match s {
             "A" | "X" => Ok(Self::Rock),
             "B" | "Y" => Ok(Self::Paper),
