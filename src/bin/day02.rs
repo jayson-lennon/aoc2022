@@ -87,22 +87,18 @@ impl Round {
     fn outcome(&self) -> Outcome {
         use Choice::*;
 
-        let opponent = self.opponent;
+        match (self.me, self.opponent) {
+            (Rock, Rock) => Outcome::Draw,
+            (Rock, Paper) => Outcome::Lose,
+            (Rock, Scissors) => Outcome::Win,
 
-        match self.me {
-            Rock if opponent == Rock => Outcome::Draw,
-            Rock if opponent == Paper => Outcome::Lose,
-            Rock if opponent == Scissors => Outcome::Win,
+            (Paper, Rock) => Outcome::Win,
+            (Paper, Paper) => Outcome::Draw,
+            (Paper, Scissors) => Outcome::Lose,
 
-            Paper if opponent == Rock => Outcome::Win,
-            Paper if opponent == Paper => Outcome::Draw,
-            Paper if opponent == Scissors => Outcome::Lose,
-
-            Scissors if opponent == Rock => Outcome::Lose,
-            Scissors if opponent == Paper => Outcome::Win,
-            Scissors if opponent == Scissors => Outcome::Draw,
-
-            Rock | Paper | Scissors => unreachable!(),
+            (Scissors, Rock) => Outcome::Lose,
+            (Scissors, Paper) => Outcome::Win,
+            (Scissors, Scissors) => Outcome::Draw,
         }
     }
 }
